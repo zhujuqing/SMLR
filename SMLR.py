@@ -30,15 +30,13 @@ if __name__ == "__main__":
     mat_result = np.zeros((100,10))
     index = 50
     for i in range(10):
-        train_features = boston.data[i*index:(i+1)*index]
-        train_targets = boston.target[i*index:(i+1)*index]
+	shuffleIdx = range(500)
+        np.random.shuffle(shuffleIdx)
+        train_features = boston.data[:100]
+        train_targets = boston.target[:100]
         ridgeRegression.fit(train_features , train_targets )
         mat[:,i] = ridgeRegression.coef_
         mat_result[:,i] = ridgeRegression.predict(test_features)
-    print "mat is"
-    print mat
-    print "mat_result is"
-    print mat_result
 #test
     mean_mat = np.mean(mat[0])
     covariancemat = np.cov(mat.T)
